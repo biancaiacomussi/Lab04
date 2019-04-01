@@ -131,23 +131,24 @@ public class CorsoDAO {
 	 */
 	public boolean inscriviStudenteACorso(Studente studente, Corso corso) {
 		final String sql = "INSERT INTO iscrizione (matricola, codins) VALUES (?, ?)";
-		StudenteDAO dao = new StudenteDAO();
-		boolean riuscito=false;
+		int ris=0;
 		try {
 			Connection conn = ConnectDB.getConnection();
 			PreparedStatement st = conn.prepareStatement(sql);
-			if(dao.getStudentePerMatricola(studente.getMatricola()).equals(studente) &&
-				this.getCorso(corso.getCodins()).equals(corso)) {
+			
+			if(this.getStudentiIscrittiAlCorso(corso).contains(studente)==false) {
 			st.setInt(1, studente.getMatricola());
 			st.setString(2, corso.getCodins());
-			riuscito = st.execute(); //genera RuntimeException
-			}conn.close();
+			ris = st.executeUpdate();}
+			//}//conn.close();
 		}catch (SQLException e) {
 			// e.printStackTrace();
 			throw new RuntimeException("Errore Db");
 		}
 		// ritorna true se l'iscrizione e' avvenuta con successo
 		
-		return riuscito;
+		if(ris==1)
+			return true;
+		else return false;
 	}
 }

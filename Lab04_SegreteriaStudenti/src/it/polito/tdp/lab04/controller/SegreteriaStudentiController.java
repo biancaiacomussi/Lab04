@@ -124,7 +124,7 @@ public class SegreteriaStudentiController {
     void doIscrivi(ActionEvent event) {
     	txtResult.clear();
 int matr;
-    	
+    	boolean iscrivi;
     	if(txtMatricola.getText().equals("")) {
     		txtResult.appendText("Inserisci matricola\n");
     	} else {
@@ -134,19 +134,17 @@ int matr;
     		
     		if(model.restituisciStudente(matr)==null)
     			txtResult.appendText("Studente non presente\n");
-    		if(comboBox.getValue()!=null || comboBox.getValue()!=null) {
-    			model.iscrivi(model.restituisciStudente(matr), comboBox.getValue());
-    				
-    				txtResult.appendText("Studente iscritto al corso!");
-    				
+    		if(comboBox.getValue()==null || comboBox.getValue().getNome().equals("")) {
+    			txtResult.appendText("Inserire corso\n");
     			
-    		}else if(model.studenteSegueCorso(model.restituisciStudente(matr), comboBox.getValue()))
-        			txtResult.appendText("Studente già iscritto a questo corso\n");
-    		else if(model.restituisciStudente(matr)==null)
-    			txtResult.appendText("Studente non presente\n");
-    		else if(model.restituisciCorsiPerStudente(matr).isEmpty())
-    			txtResult.appendText("Studente non iscritto a nessun corso\n");
-    		
+    		} else {
+    			
+   			iscrivi = model.iscrivi(model.restituisciStudente(matr), comboBox.getValue());
+   			 if(iscrivi==true)
+   				txtResult.appendText("Studente iscritto al corso!");
+   			 else
+   				 txtResult.appendText("Studente già iscritto a questo corso\n"); 
+    		}
     		
     		
     	}catch(NumberFormatException e) {
@@ -164,6 +162,7 @@ int matr;
     	txtCognome.clear();
     	txtNome.clear();
     	comboBox.setValue(null);
+    	txtMatricola.clear();
 
     }
 

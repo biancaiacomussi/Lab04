@@ -41,7 +41,7 @@ public class Model {
 	
 	public boolean iscrivi(Studente s, Corso c) {
 		CorsoDAO dao = new CorsoDAO();
-		dao.inscriviStudenteACorso(s, c);
+		//dao.inscriviStudenteACorso(s, c);
 		return dao.inscriviStudenteACorso(s, c);
 	}
 }
