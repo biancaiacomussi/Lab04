@@ -43,13 +43,14 @@ public class CorsoDAO {
 				corsi.add(c);
 			}
 
-			//conn.close();
-			return corsi;
+			conn.close();
+			
 
 		} catch (SQLException e) {
 			// e.printStackTrace();
 			throw new RuntimeException("Errore Db");
 		}
+		return corsi;
 	}
 
 	/*
@@ -89,7 +90,7 @@ public class CorsoDAO {
 				studenti.add(stud);
 				
 				}
-			//conn.close();
+			conn.close();
 			}catch (SQLException e) {
 				// e.printStackTrace();
 				throw new RuntimeException("Errore Db");
@@ -117,7 +118,7 @@ public class CorsoDAO {
 				corsi.add(c);
 				
 				}
-			//conn.close();
+			conn.close();
 			}catch (SQLException e) {
 				// e.printStackTrace();
 				throw new RuntimeException("Errore Db");
@@ -140,7 +141,7 @@ public class CorsoDAO {
 			st.setInt(1, studente.getMatricola());
 			st.setString(2, corso.getCodins());
 			ris = st.executeUpdate();}
-			//}//conn.close();
+			conn.close();
 		}catch (SQLException e) {
 			// e.printStackTrace();
 			throw new RuntimeException("Errore Db");

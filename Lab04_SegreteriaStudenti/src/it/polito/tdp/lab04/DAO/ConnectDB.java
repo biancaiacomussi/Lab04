@@ -7,21 +7,22 @@ import java.sql.SQLException;
 public class ConnectDB {
 
 	static private final String jdbcUrl = "jdbc:mysql://localhost/iscritticorsi?user=root&password=bianca97";
-	static private Connection connection = null;
+	//static private Connection connection = null;
 
 	public static Connection getConnection() {
 
+		Connection conn;
+		
 		try {
-			if (connection == null) {
-				connection = DriverManager.getConnection(jdbcUrl);
-			}
-			return connection;
-
+			
+				conn = DriverManager.getConnection(jdbcUrl);
+			
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 			throw new RuntimeException("Cannot get a connection " + jdbcUrl, e);
 		}
+		return conn;
 	}
 
 }

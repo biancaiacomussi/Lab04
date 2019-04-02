@@ -37,7 +37,7 @@ public class StudenteDAO {
 				//conn.close();
 			}
 			
-			//conn.close();
+			conn.close();
 			
 		} catch (SQLException e) {
 			// e.printStackTrace();
